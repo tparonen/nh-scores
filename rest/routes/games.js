@@ -43,15 +43,39 @@ var keys = [
   'message'
 ];
 
+var dungeonNames = [
+  'The Dungeons of Doom',
+  'Gehennom',
+  'The Gnomish Mines',
+  'The Quest',
+  'Sokoban',
+  'Fort Ludios',
+  'Vlad\'s Tower',
+  'Elemental Planes'
+];
+
+var dungeonLevels = [];
+dungeonLevels[-1] = 'Plane of Earth';
+dungeonLevels[-2] = 'Plane of Air';
+dungeonLevels[-3] = 'Plane of Fire';
+dungeonLevels[-4] = 'Plane of Water';
+dungeonLevels[-5] = 'Astral Plane';
+
 router.get('/', function(req, res, next) {
   fs.readFileAsync(paths.nethackLogfile, 'utf8').then(function(data) {
     var lines = s.lines(s.trim(data));
     var games = _.map(lines, function(line, index) {
       var parts = line.split(',');
       var values = s.words(parts[0]).concat(parts[1]);
-      var result = _.object(keys, values);
-      result.row_id = index;
-      return result;
+      var game = _.object(keys, values);
+      if (dungeonNames[game.dungeon] !== undefined) {
+        game.dungeon = dungeonNames[game.dungeon];
+      }
+      if (dungeonLevels[game.level] !== undefined) {
+        game.level = dungeonLevels[game.level];
+      }
+      game.row_id = index;
+      return game;
     });
     res.json(games);
   }, function(err) {
