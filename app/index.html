@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html class="no-js" lang="en">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -10,18 +10,31 @@
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
         <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/foundation.css">
         <link rel="stylesheet" href="css/main.css">
         <script src="js/modernizr.min.js"></script>
     </head>
     <body>
-        <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
 
-        <!-- Add your site or application content here -->
-        <p>Hello world! This is HTML5 Boilerplate.</p>
+        <section>
+            <div class="row">
+                <div class="large-12 columns">
+                    <h3>Nethack Games</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-12 columns">
+                    <div id="scores-app">
+
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <script src="js/vendor.min.js"></script>
         <script src="js/app.min.js"></script>
+
+        <script>document.write('<script src="//' + (location.hostname || 'localhost') + ':35729/livereload.js?snipver=1"><\/script>')</script>
+
     </body>
 </html>

@@ -2,39 +2,49 @@
   "name": "nh-scores",
   "version": "1.0.0",
   "description": "Nethack score list",
-  "main": "app/index.js",
   "scripts": {
+    "start": "http-server -a localhost -p 8000 -c-1",
+    "start-rest": "pm2-dev ./rest/app.js",
     "test": "./node_modules/gulp/bin/gulp.js test",
-    "start": "./node_modules/gulp/bin/gulp.js",
-    "build": "./node_modules/gulp/bin/gulp.js build"
+    "build": "./node_modules/gulp/bin/gulp.js build",
+    "watch": "./node_modules/gulp/bin/gulp.js"
   },
   "author": "Tatu Paronen",
   "license": "MIT",
   "dependencies": {
-    "backbone": "1.2.3",
     "bluebird": "2.10.2",
     "express": "4.13.3",
     "foundation-sites": "5.5.3",
-    "mongoose": "4.2.2",
-    "react": "0.14.0",
+    "history": "1.13.0",
+    "jquery": "^2.1.4",
+    "lodash": "^3.10.1",
+    "react": "0.14.x",
+    "react-dom": "0.14.x",
+    "react-router": "^1.0.0-rc3",
     "redis": "2.2.5",
+    "reflux": "0.3.0",
     "underscore": "1.8.3",
-    "underscore.string": "^3.2.2"
+    "underscore.string": "3.2.2"
   },
   "devDependencies": {
-    "connect-livereload": "^0.5.3",
+    "babel-preset-es2015": "*",
+    "babel-preset-react": "*",
+    "babelify": "7.1.0",
+    "browserify": "12.0.1",
     "gulp": "3.9.0",
     "gulp-autoprefixer": "3.1.0",
+    "gulp-babel": "6.0.0",
     "gulp-concat": "2.6.0",
-    "gulp-karma": "0.0.5",
     "gulp-livereload": "3.8.1",
     "gulp-rename": "1.2.2",
     "gulp-sass": "2.0.4",
     "gulp-uglify": "1.4.2",
+    "gulp-util": "^3.0.7",
     "gulp-watch": "4.3.5",
-    "gulp-webserver": "0.9.1",
-    "karma": "0.13.14",
-    "merge-stream": "1.0.0",
-    "run-sequence": "1.1.4"
+    "run-sequence": "1.1.4",
+    "vinyl-buffer": "1.0.0",
+    "vinyl-source-stream": "1.1.0",
+    "vinyl-transform": "1.0.0",
+    "watchify": "3.6.0"
   }
 }

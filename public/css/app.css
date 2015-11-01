@@ -2765,7 +2765,7 @@ fieldset {
     padding: 0 0.1875rem; }
 
 /* Error Handling */
-"[data-abide]" .error small.error, "[data-abide]" .error span.error, "[data-abide]" span.error, "[data-abide]" small.error {
+[data-abide] .error small.error, [data-abide] .error span.error, [data-abide] span.error, [data-abide] small.error {
   display: block;
   font-size: 0.75rem;
   font-style: italic;
@@ -2776,7 +2776,7 @@ fieldset {
   background: #f04124;
   color: #FFFFFF; }
 
-"[data-abide]" span.error, "[data-abide]" small.error {
+[data-abide] span.error, [data-abide] small.error {
   display: none; }
 
 span.error, small.error {
