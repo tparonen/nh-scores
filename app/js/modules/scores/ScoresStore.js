@@ -11,7 +11,7 @@ export default Reflux.createStore({
     return [];
   },
   loadScores: function(params) {
-    $.getJSON('http://46.101.229.210/api/games', function(data) {
+    $.getJSON('http://46.101.229.210/api/games/all', function(data) {
       this.onLoad(data);
     }.bind(this));
   },

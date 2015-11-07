@@ -2,9 +2,10 @@
   "name": "nh-scores",
   "version": "1.0.0",
   "description": "Nethack score list",
+  "repository": "tparonen/nh-scores",
   "scripts": {
-    "start": "http-server -a localhost -p 8000 -c-1",
-    "start-rest": "pm2-dev ./rest/app.js",
+    "start": "pm2-dev run ./app.js",
+    "start-rest": "pm2-dev run ./rest/rest.js",
     "test": "./node_modules/gulp/bin/gulp.js test",
     "build": "./node_modules/gulp/bin/gulp.js build",
     "watch": "./node_modules/gulp/bin/gulp.js"

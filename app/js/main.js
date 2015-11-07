@@ -1,9 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import ScoresTable from './modules/scores/ScoresTable'
+import ScoresApp from './modules/scores/ScoresApp'
 
-$(document).foundation();
-
-ReactDOM.render(<ScoresTable />, document.getElementById('scores-app'));
+ReactDOM.render(<ScoresApp />, document.getElementById('scores-app'));
 
