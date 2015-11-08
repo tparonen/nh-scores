@@ -3,7 +3,7 @@
 var express = require('express'),
     redis   = require('redis'),
     fs      = require('fs'),
-    _       = require('underscore'),
+    _       = require('lodash'),
     s       = require('underscore.string');
 
 var Promise = require('bluebird');
@@ -61,14 +61,24 @@ dungeonLevels[-3] = 'Plane of Fire';
 dungeonLevels[-4] = 'Plane of Water';
 dungeonLevels[-5] = 'Astral Plane';
 
-var getGames = function() {
+var fetchGames = function() {
   return fs.readFileAsync(paths.nethackLogfile, 'utf8')
     .then(function(data) {
-      var lines = s.lines(s.trim(data));
+      var lines = _.words(_.trim(data), /[^\r\n]+/g);
       return _.map(lines, function(line, index) {
+
         var parts = line.split(',');
-        var values = s.words(parts[0]).concat(parts[1]);
+        var values = parts[0].split(' ').concat(parts[1]);
         var game = _.object(keys, values);
+
+        game.score = _.parseInt(game.score, 10);
+        game.level = _.parseInt(game.level, 10);
+        game.max_level = _.parseInt(game.max_level, 10);
+        game.hit_points = _.parseInt(game.hit_points, 10);
+        game.max_hit_points = _.parseInt(game.max_hit_points, 10);
+        game.num_deaths = _.parseInt(game.num_deaths, 10);
+        game.user_id = undefined;
+
         if (dungeonNames[game.dungeon] !== undefined) {
           game.dungeon = dungeonNames[game.dungeon];
         }
@@ -76,28 +86,55 @@ var getGames = function() {
           game.level = dungeonLevels[game.level];
         }
         game.row_id = index;
+
         return game;
       });
     });
 };
 
-router.get('/', function(req, res, next) {
-  res.json({message: 'lol'});
-});
+var logReadError = function(err) {
+  console.error('Failed to read file: '+err);
+};
 
-router.get('/all', function(req, res, next) {
-  getGames()
+var getErrorResponse = function(err) {
+  return {error: {message: 'An error occurred'}};
+};
+
+var getResponse = function(data) {
+  return {payload: data};
+};
+
+var getAllGames = function(req, res, next) {
+  fetchGames()
     .then(function(games) {
-      res.json(games);
+      res.json(getResponse({games: games}));
     })
     .catch(function(err) {
-      console.err('Failed to read file');
-      res.json([]);
+      logReadError(err);
+      res.json(getErrorResponse(err));
     });
-});
+};
 
-router.get('/best', function(req, res, next) {
-  res.json({message: 'lulz'})
-});
+router.get('/', getAllGames);
+
+router.get('/all', getAllGames);
+
+var sortGames = function(games) {
+  return _.sortBy(games, 'score').reverse();
+};
+
+var getBestGames = function(req, res, next) {
+  fetchGames()
+    .then(function(games) {
+      var sorted = sortGames(games);
+      res.json(getResponse({games: sorted}));
+    })
+    .catch(function(err) {
+      logReadError(err);
+      res.json(getErrorResponse(err));
+    });
+};
+
+router.get('/best', getBestGames);
 
 module.exports = router;

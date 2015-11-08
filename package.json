@@ -24,9 +24,7 @@
     "react-dom": "0.14.x",
     "react-router": "^1.0.0-rc3",
     "redis": "2.2.5",
-    "reflux": "0.3.0",
-    "underscore": "1.8.3",
-    "underscore.string": "3.2.2"
+    "reflux": "0.3.0"
   },
   "devDependencies": {
     "babel-preset-es2015": "*",

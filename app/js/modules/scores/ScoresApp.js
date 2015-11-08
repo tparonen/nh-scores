@@ -51,7 +51,7 @@ class ScoresTable extends React.Component {
   }
   componentDidMount() {
     this.unsubscribe = ScoresStore.listen(this.onScoresChange);
-    ScoresActions.ScoresUpdate();
+    ScoresActions.ScoresUpdateAll();
   }
   componentWillUnmount() {
     this.unsubscribe();
@@ -95,8 +95,6 @@ export default class ScoresApp extends React.Component {
     return (
       <div>
         <h4>Latest games</h4>
-        <ScoresTable />
-        <h4>Best scores</h4>
         <ScoresTable />
       </div>
     );
