@@ -9,13 +9,14 @@ class ScoresRow extends React.Component {
     super(props);
   }
   getMoment(dateStr) {
+    moment.locale('fi');
     return moment(dateStr, 'YYYYMMDD');
   }
   getDuration(start, end) {
     return this.getMoment(end).diff(this.getMoment(start), 'days');
   } 
   formatDate(dateStr) {
-    return this.getMoment(dateStr).format('L');
+    return this.getMoment(dateStr).format('DD/MM/YYYY');
   }
   formatCharacter(entry) {
     return (
